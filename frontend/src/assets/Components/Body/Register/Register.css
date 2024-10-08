@@ -1,0 +1,33 @@
+.register{
+    padding-top: 5rem;
+    width: 100wh;
+    height: 100vh;
+    text-align: center;
+
+}
+.register form{
+
+
+    padding: 1rem;
+    
+}
+
+.register form input{
+    display: block;
+    flex-wrap: wrap;
+    width: 20rem;
+    height: 2rem;
+    margin: 1.2rem auto 1.2rem auto;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+   
+   
+}
+.register button{
+    padding: 0.4rem 5rem 0.4rem 5rem ;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
