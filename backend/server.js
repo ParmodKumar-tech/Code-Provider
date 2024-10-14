@@ -6,9 +6,11 @@ const app=express();
 const cors = require("cors");
 const bcrypt=require("bcrypt");
 
+const cookieParser=require("cookie-parser");
+
 // Add middleware to parse incoming JSON requests
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(cors()); // Enable CORS for all routes
 
 mongoose.connect("mongodb://127.0.0.1:27017/react-dragcoder") // database created--
@@ -19,9 +21,12 @@ app.post("/register",async(req,res)=>{
     let isUserExist= await userModel.findOne({email});
 
     if(isUserExist){
-        console.log("already exists");
+       res.send("User already exists, Login now!");
         
-    }else{
+    }
+    
+    else
+    {
 
     // hashPass= original Pass + salt(random string);
     bcrypt.genSalt(10,(err,salt)=>{
@@ -31,29 +36,40 @@ app.post("/register",async(req,res)=>{
             email:email,
             password:hashPass
         })
-        
+        res.send({message:"Registered Successfully!",newUser})
     })
- })}
+    
+    
+
+   }
+  
+
+)}
    
-    
-    
 })
 
 app.post("/login",async(req,res)=>{
    const {email,password}=req.body;
    let isRegisteredUser= await userModel.findOne({email});
 
-   if(isRegisteredUser){
-    
-    console.log("you already exists")
-   
+    if(isRegisteredUser){
+        bcrypt.compare(password,`${isRegisteredUser.password}`,(err,result)=>{
+            if(result){
+                res.send({validUser:isRegisteredUser});
+            }
+            else{
+                res.send("Password does not match!")
+            }
+        })
+
+    }else{
+        res.send("User does not exists, Register now!");
     }
 
-   else{
+    
+
    
-    console.log("not exist");
-   
-    }
+
 
   
 })
@@ -63,20 +79,34 @@ app.get("/all-source-code",async(req,res)=>{
     res.json(allData);
 })
 
-app.post("/source-code",async(req,res)=>{
+app.post("/add-source-code",async(req,res)=>{
     let addSourceCode=await cardModel(req.body);
     addSourceCode.save();
-    console.log(addSourceCode)
+    res.send("Project added !");
 })
 
 
-app.get("/card/:id",async(req,res)=>{
+app.get("/projectinfo/:id",async(req,res)=>{
     const {id}=req.params;
-    let specificCardInfo= await cardModel.findOne({id});
-    console.log(specificCardInfo);
+    let findProjectInfo=await cardModel.findById(id);
+    res.send(findProjectInfo);
+    
 
 })
 
+app.post("/updateprojectinfo/:id",async(req,res)=>{
+    const {id}=req.params;
+    let updateProjectInfo=await cardModel.findByIdAndUpdate({_id:id},{...req.body},{new:true});
+    res.send("update successfully!");
+})
+
+
+app.get("/delete/:id",async(req,res)=>{
+    const {id}=req.params;
+    let deleteProject=await cardModel.findOneAndDelete({_id:id});
+    res.send("delete successfully");
+
+})
 
 app.listen("8000",(req,res)=>{
     console.log("server is listing on port 8000");

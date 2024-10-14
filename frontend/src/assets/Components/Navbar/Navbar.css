@@ -50,6 +50,15 @@
     background-color: #ced8ff;
 }
 
+.nav-username{
+    margin: 0rem 1rem 0rem 3rem;
+    border: 0.1rem solid black;
+    border-radius: 0.5rem;
+    padding: 0.4rem;
+    
+   
+}
+
 .navbar .links ul li a{
     text-decoration: none;
     color: black;
@@ -83,7 +92,11 @@
     margin: 0.25rem;
    
 }
-
+.nav-logout {
+    font-size: 1.1rem;
+    cursor: pointer;
+    
+}
 
 @media (max-width:650px){
 
@@ -121,11 +134,26 @@
         background-color: #ced8ff9f;
        
     }
+    .navbar .nav-logout{
+    
+      padding-left: 1.4rem;
+      &:hover{
+        font-weight:700;
+        background-color: #ced8ff9f;
+      }
+    }
     .navbar .links ul li a:hover{
             background-color: #ced8ff9f;
             font-weight:700;
+            cursor: pointer;
         
     }
 
+    .nav-username {
+        width: 100%;
+        margin: 0.2rem;
+        padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+    }
+    
    
 }

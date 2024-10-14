@@ -1,31 +1,50 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function AddProject() {
 
-    const [title,setTitle]=useState();
-    const [name,setName]=useState();
-    const [languageAndTool,setLanguageAndTool]=useState();
-    const [content,setContent]=useState();
-    const [price,setPrice]=useState();
+    const [details,setDetails]=useState({
+        name:"",
+        languageAndTool:"",
+        content:"",
+        price:""
+    });
+ 
+    const navigate=useNavigate();
 
     let handleSubmit= async(e)=>{
         e.preventDefault();
-        await axios.post("http://localhost:8000/source-code",{title,name,languageAndTool,content,price})
-        .then((res)=>console.log(res.data))
+        let res=await axios.post("http://localhost:8000/add-source-code",details)
+        .then((res)=>{
+            if(res.data){
+                navigate('/')
+            }
+            else{
+                console.log("not redirect")
+            }
+        })
         .catch((e)=>console.log(e))
     }
 
+    let handleOnChange=(e)=>{
+        const {name,value}=e.target;
+        
+       setDetails((prev)=>{
+        return {...prev,[name]:value}
+       })
+       
+    }
 
     return (
     <div>
     <h1>Add Source Code</h1>
     <form onSubmit={handleSubmit}>
-        <input type="text" name="title" onChange={(e)=>setTitle(e.target.value)} id="title" placeholder="Title"/>
-        <input type="text" name="name" onChange={(e)=>setName(e.target.value)} id="name" placeholder="Name"/>
-        <input type="text" name="lantool" onChange={(e)=>setLanguageAndTool(e.target.value)} id="langtool" placeholder="Language and Tool"/>
-        <input type="text" name="content" onChange={(e)=>setContent(e.target.value)} id="content" placeholder="Content"/>
-        <input type="number" name="price" onChange={(e)=>setPrice(e.target.value)} id="price" placeholder="Price"/>
+        <input type="text" name="title" onChange={handleOnChange} id="title" placeholder="Title"/>
+        <input type="text" name="name"  onChange={handleOnChange} id="name" placeholder="Name"/>
+        <input type="text" name="lantool" onChange={handleOnChange} id="langtool" placeholder="Language and Tool"/>
+        <input type="text" name="content" onChange={handleOnChange} id="content" placeholder="Content"/>
+        <input type="number" name="price" onChange={handleOnChange}id="price" placeholder="Price"/>
         <button>submit</button>
     </form>
     </div>

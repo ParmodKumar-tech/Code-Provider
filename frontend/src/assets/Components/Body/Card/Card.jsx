@@ -3,6 +3,7 @@ import './Card.css';
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
+
 function Card() {
 
     const [data,setData]=useState([]);
@@ -33,18 +34,10 @@ function Card() {
 
                     <div key={id} className="card">
                     <h4>Title:{item.title}</h4>
+                    <h3>Id:{item._id}</h3>
                     <img src="/images/img.jpg" alt="card-image"/>
                     
-                        <div className='card-info' >
-                            <ul>
-                                <li>Name :{item.name}</li>
-                                <li>Language & Tool : {item.languageAndTool}</li>
-                                <li>Content : {item.content}</li>
-                                <li>Price : {item.price}</li>
-                            </ul>
-        
-                        </div>
-                    <Link className="card-btn" to="/projectinfo">Buy</Link>
+                    <Link className="card-btn" to={`/projectinfo/${item._id}`} >Buy</Link>
                     
             </div>
                 )
