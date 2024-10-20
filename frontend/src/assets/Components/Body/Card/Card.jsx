@@ -35,7 +35,7 @@ function Card() {
                     <div key={id} className="card">
                     <h4>Title:{item.title}</h4>
                     <h3>Id:{item._id}</h3>
-                    <img src="/images/img.jpg" alt="card-image"/>
+                    <img  className="card-img" src={item.image} alt="card-image"/>
                     
                     <Link className="card-btn" to={`/projectinfo/${item._id}`} >Buy</Link>
                     

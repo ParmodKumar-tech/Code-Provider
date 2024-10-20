@@ -5,7 +5,11 @@ const cardSchema=mongoose.Schema({
     name:String,
     languageAndTool:String,
     content:String,
-    price:Number
+    price:Number,
+    image:{
+        type:String,
+        required:true
+    }
 })
 
 module.exports=cardSchema;

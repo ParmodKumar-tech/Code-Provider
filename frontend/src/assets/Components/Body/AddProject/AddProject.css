@@ -1,0 +1,33 @@
+.addProject{
+    padding-top: 2rem;
+    width: 100wh;
+    height: 100vh;
+    text-align: center;
+}
+
+.addProject h1{
+    border-bottom: 3px solid black;
+    width: 18rem;
+    margin: 0rem auto 0rem auto;
+  
+    
+}
+
+.addProject form input{
+    display: block;
+    flex-wrap: wrap;
+    width: 20rem;
+    height: 2rem;
+    margin: 1rem auto 1.2rem auto;
+    border-radius: 0.5rem;
+    padding: 1.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.addProject button{
+    padding: 0.4rem 5rem 0.4rem 5rem ;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}

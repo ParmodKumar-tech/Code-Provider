@@ -1,19 +1,21 @@
 .main{
     display: flex;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    justify-content: start;
+    margin: 1rem;
 }
 
 .card{
-    margin: 1.1rem;
+    
     width: 25rem;
     padding: 0.5rem;
     border-radius: 1rem;
     border: 2px solid black;
     text-align: center;
-
+    height: 20rem;
  
 }
+
 
 .card-info ul{
     display: inline-block;
@@ -32,7 +34,9 @@ ul li{
     
 }
 .card img{
-    max-width: 100%;
+    width: 95%;
+    height: 45%;
+
    
 }
 

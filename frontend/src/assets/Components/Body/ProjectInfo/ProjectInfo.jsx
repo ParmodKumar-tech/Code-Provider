@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Link,useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import './ProjectInfo.css'
 
 function ProjectInfo() {
 
@@ -45,8 +45,8 @@ function ProjectInfo() {
                     <p>Language & Tool:{data.languageAndTool}</p>
                     <p>Content:{data.content}</p>
                     <p>Price:{data.price}</p>
-                    <Link to={`/updateform/${data._id}`}>Update</Link>
-                    <Link onClick={handlDelete}>Delete</Link>
+                    <Link className="update-btn" to={`/updateform/${data._id}`}>Update</Link>
+                    <Link className="delete-btn" onClick={handlDelete}>Delete</Link>
                         
                     
             </div>

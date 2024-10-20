@@ -1,5 +1,6 @@
-import { StrictMode } from 'react'
+
 import { createRoot } from 'react-dom/client'
+import { Toaster } from 'react-hot-toast';
 import './index.css'
 import AddProject from './assets/Components/Body/AddProject/AddProject'
 import Navbar from './assets/Components/Navbar/Navbar'
@@ -13,6 +14,7 @@ import UpdateProjectInfoForm from './assets/Components/Body/UpdateProjectInfoFor
 createRoot(document.getElementById('root')).render(
 
   <BrowserRouter>
+  <div className='toaster'><Toaster  position="top-center"/></div>
       <Navbar/>
       <Routes>
 
@@ -25,6 +27,8 @@ createRoot(document.getElementById('root')).render(
         <Route path='/login' element={<Login/>}></Route>
     
       </Routes>
+
+
     
     </BrowserRouter>
  

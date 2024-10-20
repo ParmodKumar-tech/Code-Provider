@@ -6,12 +6,18 @@ const app=express();
 const cors = require("cors");
 const bcrypt=require("bcrypt");
 
+
 const cookieParser=require("cookie-parser");
+const isLogined = require("./middleware");
 
 // Add middleware to parse incoming JSON requests
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors()); // Enable CORS for all routes
+
+// app.use((req,res,next)=>{
+
+// })
 
 mongoose.connect("mongodb://127.0.0.1:27017/react-dragcoder") // database created--
 .then((res)=>console.log("connect with DB"));
@@ -80,6 +86,7 @@ app.get("/all-source-code",async(req,res)=>{
 })
 
 app.post("/add-source-code",async(req,res)=>{
+   
     let addSourceCode=await cardModel(req.body);
     addSourceCode.save();
     res.send("Project added !");

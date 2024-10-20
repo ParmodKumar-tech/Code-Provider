@@ -1,3 +1,7 @@
+.active{
+    background-color: #ced8ff;
+}
+
 .navbar{
     background-color: white;
     display: flex;
@@ -46,9 +50,7 @@
 }
 
 
-.active{
-    background-color: #ced8ff;
-}
+
 
 .nav-username{
     margin: 0rem 1rem 0rem 3rem;
@@ -68,9 +70,9 @@
     margin: 0.5rem 2rem 0.5rem 0rem;
     padding: 0.4rem 1rem 0.4rem 1rem;
 
-    &:not(.active) a:hover{
+    /* &:not(.active) a:hover{
         background-color: #ced8ff9f;  
-    }
+    } */
 
 }
 

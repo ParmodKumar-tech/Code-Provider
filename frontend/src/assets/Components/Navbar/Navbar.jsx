@@ -1,12 +1,12 @@
 import React, {useEffect, useState}from 'react';
 import './Navbar.css';
-import {NavLink,Link} from 'react-router-dom';
+import {NavLink,Link,useNavigate} from 'react-router-dom';
 
 
 function Navbar(){
 
     const [showMenu,setShowMenu]=useState(false);
-    
+    const navigate=useNavigate();
    
     const [username,setUsername]=useState();
 
@@ -26,23 +26,51 @@ function Navbar(){
 
     const logout=()=>{
         setUsername(localStorage.removeItem("currUser"))
+        navigate("/")
     }
   
-
+  
     return(
         
         <nav className='navbar'>
             
-            <h1><Link to="/">drag_coder</Link></h1>
+            <h1><Link onClick={autoCloseMenu} to="/">drag_coder</Link></h1>
             <div className='links'>
                 <ul className={(showMenu && "open").toString()}>
-                    <li onClick={autoCloseMenu}><NavLink to="/addproject">Add Project</NavLink></li>
-                    <li onClick={autoCloseMenu}><NavLink to='/register'>Register</NavLink></li>
-                    {username ?<li className='nav-logout' onClick={logout}>Logout</li> :<li onClick={autoCloseMenu}><NavLink to='/login'>Login</NavLink></li>}
+                    <li onClick={autoCloseMenu}>
+                    <NavLink 
+                    to={username ? "/addproject":"/login"}
+                    className={({ isActive }) => username ? isActive ? "active" : "":""}>
+                       
+                        Add Project
+                        </NavLink></li>
                     
                     
-                    {username && <p  className='nav-username'>{username}</p>}
-                    
+                    {username ? (
+                        <>
+                            <li className='nav-logout' onClick={logout}>Logout</li>
+                            <p className='nav-username'>{username}</p>
+                        </>
+                    ) : (
+                        <>
+                            <li onClick={autoCloseMenu}>
+                                <NavLink
+                                    to="/register"
+                                    className={({ isActive }) => isActive ? "active" : ""}
+                                >
+                                    Register
+                                </NavLink>
+                            </li>
+                            <li onClick={autoCloseMenu}>
+                                <NavLink
+                                    to="/login"
+                                    className={({ isActive }) => isActive ? "active" : ""}
+                                >
+                                    Login
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
                 </ul>
 
             </div>
